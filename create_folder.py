@@ -1,0 +1,16 @@
+import os
+from bs4 import BeautifulSoup
+
+html = '''<select name="RTU1" id="RTU1" class="form-control action">
+<option value="">Select RTU</option>
+<option value="74">Apsley</option><option value="69">Ashens</option><option value="8">Beulah</option><option value="100">Beulah South</option><option value="19">Broughton</option><option value="1">Bungalally</option><option value="47">Charam</option><option value="51">Clearlake</option><option value="18">Concongella</option><option value="85">Crowlands</option><option value="102">Crymelon</option><option value="68">Deep Lead</option><option value="14">Dimboola East</option><option value="101">Dooen</option><option value="27">Dooen 2</option><option value="7">Douglas</option><option value="67">Edenhope</option><option value="46">Edenhope 2</option><option value="70">Gerang Gerung</option><option value="76">Gerang Gerung 2</option><option value="35">Glenlee</option><option value="65">Glenlee 3</option><option value="12">Goroke</option><option value="38">Goroke South</option><option value="94">Great Western</option><option value="90">Greenfields Glenlofty</option><option value="20">Jeparit</option><option value="59">Jeparit 2</option><option value="16">Jeparit 3</option><option value="103">Joel Joel</option><option value="22">Joel South</option><option value="55">Jung </option><option value="3">Kalkee</option><option value="56">Kalkee 2</option><option value="31">Kaniva</option><option value="32">Kaniva 3</option><option value="36">Kaniva 4</option><option value="37">Kaniva 5</option><option value="95">Kirkella</option><option value="9">Lah</option><option value="15">Lake fyans</option><option value="96">Landsborough</option><option value="42">Langkoop</option><option value="66">Minyip </option><option value="92">Mooneys Gap</option><option value="87">Mt Cole Creek</option><option value="97">Mt Dryden</option><option value="2">Murra Warra </option><option value="28">Murtoa</option><option value="40">Natimuk</option><option value="41">Natimuk 2</option><option value="45">Natimuk 3</option><option value="58">Netherby</option><option value="62">Netherby 2</option><option value="43">Neuarpurr </option><option value="10">Nhill</option><option value="44">Nhill 2</option><option value="81">Noradjuha</option><option value="72">Nurcoung</option><option value="52">Ozenkadnook</option><option value="98">Pentlands Creek</option><option value="39">Peronne</option><option value="30">Pimpinio</option><option value="61">Rainbow</option><option value="17">Rhymney</option><option value="13">Rupanyup</option><option value="99">Serviceton</option><option value="23">Stawell Lake Lonsdale</option><option value="50">Ullswater</option><option value="29">Vectis</option><option value="4">Wallup</option><option value="57">Wallup 2</option><option value="6">Warracknabeal</option><option value="48">Warracknabeal 2</option><option value="93">Warrak</option><option value="49">Watchem</option><option value="71">Woorak</option><option value="53">Yanac</option>
+</select>'''
+
+soup = BeautifulSoup(html, 'html.parser')
+base_path = r"C:\files\DDDR\Data"
+
+options = soup.find_all('option')
+for option in options:
+    name = option.text.strip()
+    if name and name != "Select RTU":
+        os.makedirs(os.path.join(base_path, name), exist_ok=True)
